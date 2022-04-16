@@ -1,0 +1,72 @@
+:root {
+    --clr-neutral: #FFFF;
+    --ff-primary: 'Inter',sans-serif
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+p,
+body {
+    margin: 0;
+}
+
+/*Typography*/
+
+body {
+    font-family: var(--ff-primary);
+}
+
+button {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+/*Layout*/
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem;
+    gap:2rem;
+    background-color: rgb(85, 85, 149);
+    color: var(--clr-neutral);
+}
+
+.nav__btn {
+    color: var(--clr-neutral);
+    background-color: rgb(114, 83, 114);
+    border: none;
+    border-radius: 5px;
+    padding: 0.6rem;
+    cursor: pointer;
+}
+
+.nav__btn:hover {
+    background-color: rgb(92, 64, 92);;
+}
+
+.grid {
+    display: flex;
+    flex-direction: column;
+    /* border: 5px solid black; */
+}
+
+.grid__row {
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.node {
+    border: 1px solid rgb(145, 188, 233);
+    padding: 1rem;
+}
+
+/*Utilities*/
