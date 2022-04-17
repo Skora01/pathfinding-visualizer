@@ -3,9 +3,13 @@ import React from "react";
 function Node (props) {
 
     const extraClassName = props.isStart 
-        ? "startNode"
+        ? "node--start"
         : props.isEnd
-        ? "endNode"
+        ? "node--end"
+        : props.isShortestPath
+        ? "node--shortestPath"
+        : props.isVisited
+        ? "node--visited"
         : ""
 
     return (
