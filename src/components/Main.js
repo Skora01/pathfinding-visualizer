@@ -1,5 +1,11 @@
 import React,{useState} from "react";
-import Node from "./Node"
+import Node from "./Node";
+
+const START_NODE_ROW = 10;
+const START_NODE_COL = 10;
+const END_NODE_ROW = 10;
+const END_NODE_COL = 40;
+
 
 function Main() {
 
@@ -8,7 +14,10 @@ function Main() {
     function createNode(row, col) {
         return {
             row: row,
-            col : col
+            col : col,
+            isStart : row === START_NODE_ROW && col === START_NODE_COL,
+            isEnd : row === END_NODE_ROW && col === END_NODE_COL,
+            distance: Infinity
         }
     }
 
@@ -36,12 +45,14 @@ function Main() {
                             <div key={rowIndex} className="grid__row">
                                 {
                                     row.map((node,nodeIndex) => {
-                                        const {row, col} = node
+                                        const {row, col,isStart, isEnd} = node
                                         return (
                                             <Node
                                                 key={nodeIndex}
                                                 row={row}
                                                 col={col}
+                                                isStart={isStart}
+                                                isEnd={isEnd}
                                             />
                                         )
                                     })

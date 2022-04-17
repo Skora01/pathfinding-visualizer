@@ -70,3 +70,11 @@ nav {
 }
 
 /*Utilities*/
+
+.startNode {
+    background-color: red;
+}
+
+.endNode {
+    background-color: green;
+}
