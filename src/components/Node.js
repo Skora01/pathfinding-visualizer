@@ -6,6 +6,8 @@ function Node (props) {
         ? "node--start"
         : props.isEnd
         ? "node--end"
+        : props.isWall
+        ? "node--wall"
         : props.isShortestPath
         ? "node--shortestPath"
         : props.isVisited
@@ -13,7 +15,12 @@ function Node (props) {
         : ""
 
     return (
-        <div className={`node ${extraClassName}`}></div>
+        <div 
+            className={`node ${extraClassName}`}
+            onMouseDown={() => props.handleMouseDown(props.row, props.col)}
+            onMouseEnter={() => props.handleMouseEnter(props.row, props.col)}
+            onMouseUp={props.handleMouseUp}>
+            </div>
     )
 }
 

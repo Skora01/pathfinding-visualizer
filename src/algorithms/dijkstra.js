@@ -9,10 +9,6 @@ const steps = [
     [1, 0], // down
     [0, -1], // left
     [0, 1], // right
- /*   [-1, -1], // up-left
-    [-1, 1], // up-right
-    [1, -1], // down-left
-    [1, 1] // down-right*/
 ];
 
 export function dijkstra(grid, startNode, endNode, maxRows, maxCols) {
@@ -27,6 +23,7 @@ export function dijkstra(grid, startNode, endNode, maxRows, maxCols) {
         minHeap.pop()
         
         visitingOrder.push(currNode)
+        if(currNode.isWall) continue
         
         for(let step of steps) {
             let newRow = currNode.row + step[0]
@@ -35,7 +32,6 @@ export function dijkstra(grid, startNode, endNode, maxRows, maxCols) {
             if(newRow >= 0 && newRow < maxRows &&
                 newCol >= 0 && newCol < maxCols &&
                 grid[newRow][newCol].distance > currNode.distance + 1) {
-                    // console.log(newCol)
                     grid[newRow][newCol].distance = currNode.distance + 1
                     grid[newRow][newCol].parent = currNode
                     minHeap.push(grid[newRow][newCol])

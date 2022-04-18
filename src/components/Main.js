@@ -13,6 +13,7 @@ const MAX_COLS = 50
 function Main() {
 
     const [grid, setGrid] = useState(initializeGrid)
+    const [mouseDown, setMouseDown] = useState(false)
 
     function createNode(row, col) {
         return {
@@ -20,9 +21,10 @@ function Main() {
             col : col,
             isStart : row === START_NODE_ROW && col === START_NODE_COL,
             isEnd : row === END_NODE_ROW && col === END_NODE_COL,
-            isVisited: false,
-            isShortestPath: false,
-            distance: Infinity,
+            isVisited : false,
+            isShortestPath : false,
+            isWall : false,
+            distance : Infinity,
             parent: null
         }
     }
@@ -45,15 +47,24 @@ function Main() {
         const len = shortestPath.length
         for(let i = 0; i < len; i++) {
             setTimeout(() => {
-                const currNode = shortestPath[i]
-                let newGrid = grid.slice()
-                const newNode = {
-                    ...currNode,
-                    isShortestPath : true
-                }
+                 const currNode = shortestPath[i]
+                // let newGrid = grid.slice()
+                // const newNode = {
+                //     ...currNode,
+                //     isShortestPath : true
+                // }
 
-                newGrid[currNode.row][currNode.col] = newNode
-                setGrid(newGrid)
+                // newGrid[currNode.row][currNode.col] = newNode
+                // setGrid(newGrid)
+                setGrid(prevGrid => {
+                    return prevGrid.map(item => {
+                        return item.map(prevNode => {
+                            return prevNode.row === currNode.row && prevNode.col === currNode.col
+                                ? {...prevNode, isShortestPath: true}
+                                : prevNode
+                        })
+                    })
+                })
             }, 25 * i)
         }
     }
@@ -69,18 +80,26 @@ function Main() {
               return
             }
             setTimeout(() => {
-                const currNode = visitingOrder[i]
-                let newGrid = grid.slice()
-                const newNode = {
-                    ...currNode,
-                    isVisited : true
-                }
+                 const currNode = visitingOrder[i]
+                // let newGrid = grid.slice()
+                // const newNode = {
+                //     ...currNode,
+                //     isVisited : true
+                // }
 
-                newGrid[currNode.row][currNode.col] = newNode
-                setGrid(newGrid)
-            }, 10* i)
+                // newGrid[currNode.row][currNode.col] = newNode
+                //setGrid(newGrid)
+                setGrid(prevGrid => {
+                    return prevGrid.map(item => {
+                        return item.map(prevNode => {
+                            return prevNode.row === currNode.row && prevNode.col === currNode.col
+                                ? {...prevNode, isVisited: true}
+                                : prevNode
+                        })
+                    })
+                })
+            }, 10 * i)
 
-            // animateShortestPath(shortestPath)
         }
     }
 
@@ -90,7 +109,32 @@ function Main() {
         const visitingOrder = dijkstra(grid, startNode, endNode, MAX_ROWS, MAX_COLS)
         const shortestPath = getTheShortestPath(endNode)
         animate(visitingOrder, shortestPath)
-        // console.log(visitingOrder)
+    }
+
+    function handleMouseDown(row, col) {
+        updateGridWithWalls(row, col)
+        setMouseDown(true)
+    }
+
+    function handleMouseEnter(row, col) {
+        if(!mouseDown) return;
+        updateGridWithWalls(row, col)
+   }
+
+   function updateGridWithWalls(row, col) {
+        setGrid(prevGrid => {
+            return prevGrid.map(item => {
+                return item.map(prevNode => {
+                    return prevNode.row === row && prevNode.col === col
+                        ? {...prevNode, isWall : !prevNode.isWall}
+                        : prevNode
+                })
+            })
+        })
+   }
+
+    function handleMouseUp() {
+        setMouseDown(false)
     }
 
     return (
@@ -106,7 +150,7 @@ function Main() {
                             <div key={rowIndex} className="grid__row">
                                 {
                                     row.map((node,nodeIndex) => {
-                                        const {row, col,isStart, isEnd, isVisited,isShortestPath} = node
+                                        const {row, col,isStart, isEnd, isVisited,isShortestPath,isWall} = node
                                         return (
                                             <Node
                                                 key={nodeIndex}
@@ -116,6 +160,10 @@ function Main() {
                                                 isEnd={isEnd}
                                                 isVisited={isVisited}
                                                 isShortestPath={isShortestPath}
+                                                isWall={isWall}
+                                                handleMouseDown={handleMouseDown}
+                                                handleMouseEnter={handleMouseEnter}
+                                                handleMouseUp={handleMouseUp}
                                             />
                                         )
                                     })
