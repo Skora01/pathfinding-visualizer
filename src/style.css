@@ -40,12 +40,20 @@ nav {
   color: var(--clr-neutral);
 }
 
+main {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 10px;
+}
+
 .main__btn {
   color: var(--clr-neutral);
   background-color: rgb(114, 83, 114);
   border: none;
   border-radius: 5px;
   padding: 0.6rem;
+  margin-top: 1rem;
   cursor: pointer;
 }
 
@@ -54,6 +62,7 @@ nav {
 }
 
 .grid {
+  margin: 1rem;
   display: flex;
   flex-direction: column;
   user-select: none; /*Doesn't let user to select text. This fixes a bug with creating walls while dragging mouse over*/
@@ -61,36 +70,104 @@ nav {
 
 .grid__row {
   display: flex;
-  /* flex-direction: column; */
 }
 
 .node {
-  border: 1px solid rgb(145, 188, 233);
-  padding: 1rem;
+  outline: 1px solid rgb(145, 188, 233);
+  padding: 0.9rem;
 }
 
-.node:hover {
+
+/* .node:hover {
   background-color: grey;
-}
+} */
 
 /*Utilities*/
 
 .node--start {
   background-color: red;
+  cursor: move;
 }
 
 .node--end {
   background-color: green;
+  cursor: move;
 }
 
 .node--visited {
-  background-color: blue;
+  animation: visit 1.2s ease-out alternate forwards;
+}
+
+@keyframes visit {
+  0% {
+    transform: scale(0.3);
+    background-color: rgba(145, 188, 233, 0.75);
+    border-radius: 100%;
+  }
+
+  50% {
+    transform: scale(0.5);
+    background-color: rgba(104, 193, 180, 0.75);
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: rgba(88, 233, 216, 0.75);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgba(107, 170, 237, 0.75);
+  }
+
 }
 
 .node--shortestPath {
-  background-color: yellow;
+  animation: shortestPath 1s ease-out alternate forwards;
+}
+
+@keyframes shortestPath {
+  0% {
+    transform: scale(0.3);
+    background-color: rgb(195, 233, 145);
+    border-radius: 100%;
+  }
+
+  50% {
+    transform: scale(0.5);
+    background-color: rgb(171, 218, 110);
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: rgb(171, 218, 110)
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(246, 255, 0);
+  }
 }
 
 .node--wall {
-  background-color: grey;
+  /* background-color: grey; */
+  animation: putWall 0.2s ease-out alternate forwards
 }
+
+@keyframes putWall {
+  2% {
+    transform: scale(0.4);
+    background-color: grey;
+  }
+
+  50% {
+    transform: scale(0.7);
+    background-color: rgb(70, 66, 66);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(30, 29, 29);
+  }
+}
+

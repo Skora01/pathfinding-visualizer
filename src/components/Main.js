@@ -6,8 +6,8 @@ const START_NODE_ROW = 10;
 const START_NODE_COL = 10;
 const END_NODE_ROW = 10;
 const END_NODE_COL = 40;
-const MAX_ROWS = 20
-const MAX_COLS = 50
+const MAX_ROWS = 27
+const MAX_COLS = 63
 
 
 function Main() {
@@ -111,6 +111,7 @@ function Main() {
         animate(visitingOrder, shortestPath)
     }
 
+    /*mouse handlers*/     
     function handleMouseDown(row, col) {
         updateGridWithWalls(row, col)
         setMouseDown(true)
@@ -118,9 +119,18 @@ function Main() {
 
     function handleMouseEnter(row, col) {
         if(!mouseDown) return;
+
         updateGridWithWalls(row, col)
    }
 
+   function handleMouseUp() {
+    setMouseDown(false)
+}
+
+    /*drag & drop handlers*/ 
+    // function handleDragStart() {
+
+    // }
    function updateGridWithWalls(row, col) {
         setGrid(prevGrid => {
             return prevGrid.map(item => {
@@ -133,13 +143,10 @@ function Main() {
         })
    }
 
-    function handleMouseUp() {
-        setMouseDown(false)
-    }
+
 
     return (
         <main>
-            <h1>main</h1>
             <button 
                 className="main__btn"
                 onClick={visualize}>Visualize</button>

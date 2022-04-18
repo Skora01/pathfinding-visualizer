@@ -23,6 +23,7 @@ export function dijkstra(grid, startNode, endNode, maxRows, maxCols) {
         minHeap.pop()
         
         visitingOrder.push(currNode)
+
         if(currNode.isWall) continue
         
         for(let step of steps) {
@@ -39,7 +40,9 @@ export function dijkstra(grid, startNode, endNode, maxRows, maxCols) {
         }
         
         if(currNode === endNode) return visitingOrder
-    }   
+    }
+    /*If there is no path  to endNode then we are trapped*/ 
+    return visitingOrder   
 }
 
 export function getTheShortestPath(endNode) {
