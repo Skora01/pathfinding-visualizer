@@ -1,5 +1,7 @@
 :root {
   --clr-neutral: #ffff;
+  --clr-primary: rgb(91, 100, 126);
+  --clr-hover: rgb(53, 219, 128);
   --ff-primary: "Inter", sans-serif;
 }
 
@@ -24,20 +26,29 @@ body {
 }
 
 button {
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: 500;
+  border: none;
+  color: var(--clr-neutral);
+  background-color: var(--clr-primary);
+  cursor: pointer;
 }
 
 /*Layout*/
 
 nav {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 1rem;
+  padding: 0.5rem;
   gap: 2rem;
-  background-color: rgb(91, 100, 126);/*rgb(85, 85, 149)*/
+  background-color: var(--clr-primary);
   color: var(--clr-neutral);
+}
+
+nav button:hover {
+  color: var(--clr-hover);
 }
 
 main {
@@ -47,17 +58,54 @@ main {
   gap: 10px;
 }
 
-.main__btn {
-  color: var(--clr-neutral);
+.dropdown {
+  background-color: var(--clr-primary);
+}
+
+.dropdown__btn {
+  padding: 1rem 1rem;
+  background-color: var(--clr-primary);
+  cursor: default;
+}
+
+.dropdown__arrow {
+  display: inline-block;
+  border-top: 8px solid;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  margin-bottom: 2px;
+}
+
+.dropdown__content {
+  display: none;
+  position: absolute;
+  background-color: var(--clr-primary);
+  min-width: 160px;
+  z-index: 1;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown__content button {
+  padding: 1rem 1rem;
+  background-color: var(--clr-primary);
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-size: 1em;
+}
+
+.dropdown:hover .dropdown__content {
+  display: block;
+}
+
+.visualize__btn {
   background-color: rgb(114, 83, 114);
-  border: none;
   border-radius: 5px;
   padding: 0.6rem;
   margin-top: 1rem;
-  cursor: pointer;
 }
 
-.main__btn:hover {
+.visualize__btn:hover {
   background-color: rgb(92, 64, 92);
 }
 
@@ -76,11 +124,6 @@ main {
   outline: 1px solid rgb(145, 188, 233);
   padding: 0.9rem;
 }
-
-
-/* .node:hover {
-  background-color: grey;
-} */
 
 /*Utilities*/
 
@@ -119,7 +162,6 @@ main {
     transform: scale(1);
     background-color: rgba(107, 170, 237, 0.75);
   }
-
 }
 
 .node--shortestPath {
@@ -140,7 +182,7 @@ main {
 
   75% {
     transform: scale(1.2);
-    background-color: rgb(171, 218, 110)
+    background-color: rgb(171, 218, 110);
   }
 
   100% {
@@ -151,7 +193,7 @@ main {
 
 .node--wall {
   /* background-color: grey; */
-  animation: putWall 0.2s ease-out alternate forwards
+  animation: putWall 0.2s ease-out alternate forwards;
 }
 
 @keyframes putWall {
@@ -170,4 +212,3 @@ main {
     background-color: rgb(30, 29, 29);
   }
 }
-

@@ -46,7 +46,7 @@ export function dijkstra(grid, startNode, endNode, maxRows, maxCols) {
     return visitingOrder   
 }
 
-export function getTheShortestPath(endNode) {
+export function getTheShortestPathD(endNode) {
     const shortestPathOrder = []
     let currNode = endNode
     while(currNode.parent !== null) {

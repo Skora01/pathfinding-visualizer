@@ -54,7 +54,7 @@ export function astar(grid, startNode, endNode, maxRows, maxCols) {
     return visitingOrder
 }
 
-export function getTheShortestPath(endNode) {
+export function getTheShortestPathA(endNode) {
     const shortestPathOrder = []
     let currNode = endNode
     while(currNode.parent !== null) {
