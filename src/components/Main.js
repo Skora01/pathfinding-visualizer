@@ -1,12 +1,12 @@
-import React,{useState} from "react";
+import React,{ useState } from "react";
 import Node from "./Node";
-import {dijkstra, getTheShortestPath} from "../algorithms/dijkstra";
+import { astar, getTheShortestPath } from "../algorithms/astar";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 10;
 const END_NODE_ROW = 10;
 const END_NODE_COL = 40;
-const MAX_ROWS = 27
+const MAX_ROWS = 25
 const MAX_COLS = 63
 
 
@@ -106,7 +106,7 @@ function Main() {
     function visualize() {
         const startNode = grid[START_NODE_ROW][START_NODE_COL]
         const endNode = grid[END_NODE_ROW][END_NODE_COL]
-        const visitingOrder = dijkstra(grid, startNode, endNode, MAX_ROWS, MAX_COLS)
+        const visitingOrder = astar(grid, startNode, endNode, MAX_ROWS, MAX_COLS)
         const shortestPath = getTheShortestPath(endNode)
         animate(visitingOrder, shortestPath)
     }
@@ -121,11 +121,11 @@ function Main() {
         if(!mouseDown) return;
 
         updateGridWithWalls(row, col)
-   }
+    }
 
-   function handleMouseUp() {
-    setMouseDown(false)
-}
+    function handleMouseUp() {
+        setMouseDown(false)
+    }   
 
     /*drag & drop handlers*/ 
     // function handleDragStart() {
@@ -143,13 +143,18 @@ function Main() {
         })
    }
 
-
+   function clearGrid() {
+       setGrid(initializeGrid)
+   }
 
     return (
         <main>
             <button 
                 className="main__btn"
-                onClick={visualize}>Visualize</button>
+                onClick={visualize}>
+                    Visualize
+            </button>
+            <button onClick={clearGrid}>Clear Grid</button>
             <div className="grid">
                 {
                     grid.map((row,rowIndex) => {

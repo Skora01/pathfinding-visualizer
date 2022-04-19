@@ -1,11 +1,12 @@
 import React from "react";
-import NavBar from "./components/NavBar"
 import Main from "./components/Main"
 
 function App() {
     return (
         <div className="container">
-            <NavBar />
+            <nav className="nav--flex">
+                <h1 className="nav__title">Pathfinding Visualizer</h1>
+            </nav>
             <Main />
         </div>
     )

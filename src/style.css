@@ -36,7 +36,7 @@ nav {
   justify-content: space-around;
   padding: 1rem;
   gap: 2rem;
-  background-color: rgb(85, 85, 149);
+  background-color: rgb(91, 100, 126);/*rgb(85, 85, 149)*/
   color: var(--clr-neutral);
 }
 

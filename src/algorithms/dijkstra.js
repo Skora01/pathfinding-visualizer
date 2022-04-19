@@ -22,11 +22,12 @@ export function dijkstra(grid, startNode, endNode, maxRows, maxCols) {
         let currNode = minHeap.peek()
         minHeap.pop()
         
+        if(currNode.isWall) continue
+
         visitingOrder.push(currNode)
 
-        if(currNode.isWall) continue
-        
-        for(let step of steps) {
+       
+        for(const step of steps) {
             let newRow = currNode.row + step[0]
             let newCol = currNode.col + step[1]
     
