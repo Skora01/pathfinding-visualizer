@@ -1,0 +1,10 @@
+export const CHOOSE_ALGORITHM = "CHOOSE_ALGORITHM"
+export const RESET = "RESET"
+export const UPDATE_WITH_WALLS = "UPDATE_WITH_WALLS"
+export const UPDATE_GRID = "UPDATE_GRID"
+export const START_NODE_ROW = 10;
+export const START_NODE_COL = 10;
+export const END_NODE_ROW = 10;
+export const END_NODE_COL = 40;
+export const MAX_ROWS = 25
+export const MAX_COLS = 63
