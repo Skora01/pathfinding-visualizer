@@ -99,7 +99,7 @@ main {
 }
 
 .visualize__btn {
-  background-color: rgb(114, 83, 114);
+  background-color: var(--clr-hover);
   border-radius: 5px;
   padding: 0.6rem;
   margin-top: 1rem;

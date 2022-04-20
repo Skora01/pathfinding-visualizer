@@ -152,7 +152,7 @@ function Main() {
                     <div className="dropdown__content">
                         <button onClick={() => setAlgorithm("Dijkstra's")}>Dijkstra's</button>
                         <button onClick={() => setAlgorithm("A*")}>A* Search</button>
-                        <button>Link 3</button>
+                        {/* <button>Link 3</button> */}
                     </div>
                 </div>      
                 <h1 className="nav__title">Pathfinding Visualizer</h1>
