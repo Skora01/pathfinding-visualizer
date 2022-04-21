@@ -37,25 +37,17 @@ button {
 /*Layout*/
 
 nav {
-  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-end;
   padding: 0.5rem;
-  gap: 2rem;
+  gap: 10rem;
   background-color: var(--clr-primary);
   color: var(--clr-neutral);
 }
 
 nav button:hover {
   color: var(--clr-hover);
-}
-
-main {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  gap: 10px;
 }
 
 .dropdown {
@@ -98,6 +90,19 @@ main {
   display: block;
 }
 
+.clear {
+  display: flex;
+  gap: 3rem;
+  margin-right: 13rem;
+}
+
+main {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 10px;
+}
+
 .visualize__btn {
   background-color: var(--clr-hover);
   border-radius: 5px;
@@ -128,17 +133,25 @@ main {
 /*Utilities*/
 
 .node--start {
-  background-color: red;
+  background-image: url("./images/start.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
   cursor: move;
 }
 
 .node--end {
-  background-color: green;
+  background-image: url("./images/finish.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
   cursor: move;
 }
 
 .node--visited {
-  animation: visit 1.2s ease-out alternate forwards;
+  animation: visit 1.2s ease-out alternate forwards !important;
 }
 
 @keyframes visit {
@@ -165,7 +178,7 @@ main {
 }
 
 .node--shortestPath {
-  animation: shortestPath 1s ease-out alternate forwards;
+  animation: shortestPath 1s ease-out alternate forwards !important;
 }
 
 @keyframes shortestPath {
@@ -192,7 +205,6 @@ main {
 }
 
 .node--wall {
-  /* background-color: grey; */
   animation: putWall 0.2s ease-out alternate forwards;
 }
 
@@ -210,5 +222,28 @@ main {
   100% {
     transform: scale(1);
     background-color: rgb(30, 29, 29);
+  }
+}
+
+.node--weight {
+  background-image: url("./images/obstacle.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
+  animation: putWeight 0.2s ease-out alternate forwards;
+}
+
+@keyframes putWeight {
+  2% {
+    transform: scale(0.4);
+  }
+
+  50% {
+    transform: scale(0.7);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }

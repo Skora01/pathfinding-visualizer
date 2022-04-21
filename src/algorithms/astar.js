@@ -39,14 +39,17 @@ export function astar(grid, startNode, endNode, maxRows, maxCols) {
             let newCol = currNode.col + step[1]
 
             if(newRow >= 0 && newRow < maxRows &&
-                newCol >= 0 && newCol < maxCols &&
-                grid[newRow][newCol].distance > currNode.distance + 1) {
+                newCol >= 0 && newCol < maxCols) {
+                
+                const weight = grid[newRow][newCol].isWeight ? 10 : 1
+                if(grid[newRow][newCol].distance > currNode.distance + weight) {
 
-                    grid[newRow][newCol].distance = currNode.distance + 1
+                    grid[newRow][newCol].distance = currNode.distance + weight
                     grid[newRow][newCol].parent = currNode
 
                 if(!openSet.has(grid[newRow][newCol]))
                     openSet.add(grid[newRow][newCol])
+                }
             }
         }
 

@@ -19,7 +19,7 @@ import {
 
 function Main() {
     const [mouseDown, setMouseDown] = useState(false)
-    const { algorithm, grid, addWalls,updateGrid} = useContext(AppContext) 
+    const { algorithm, grid, addWalls, updateGrid, clearPath, toggleWeights, addWeights } = useContext(AppContext) 
 
     function animateShortestPath(shortestPath) {
         const len = shortestPath.length
@@ -51,6 +51,9 @@ function Main() {
     }
 
     function visualize() {
+
+        clearPath()
+
         const startNode = grid[START_NODE_ROW][START_NODE_COL]
         const endNode = grid[END_NODE_ROW][END_NODE_COL]
         let visitingOrder = []
@@ -85,14 +88,14 @@ function Main() {
 
     /*mouse handlers*/     
     function handleMouseDown(row, col) {
-        addWalls(row, col)
+        toggleWeights ? addWeights(row, col) : addWalls(row, col)
         setMouseDown(true)
     }
 
     function handleMouseEnter(row, col) {
         if(!mouseDown) return;
 
-        addWalls(row, col)
+        toggleWeights ? addWeights(row, col) : addWalls(row, col)
     }
 
     function handleMouseUp() {
@@ -103,7 +106,7 @@ function Main() {
         <main>
             <button 
                 className="visualize__btn"
-                onClick={visualize}>
+                onClick={ visualize }>
                     {algorithm === "" ? "Pick an Algorithm!" : `Visualize ${algorithm}`}
             </button>
             <div className="grid">
@@ -113,7 +116,7 @@ function Main() {
                             <div key={rowIndex} className="grid__row">
                                 {
                                     row.map((node,nodeIndex) => {
-                                        const {row, col,isStart, isEnd, isVisited,isShortestPath,isWall} = node
+                                        const {row, col,isStart, isEnd, isVisited,isShortestPath,isWall,isWeight} = node
                                         return (
                                             <Node
                                                 key={nodeIndex}
@@ -124,6 +127,7 @@ function Main() {
                                                 isVisited={isVisited}
                                                 isShortestPath={isShortestPath}
                                                 isWall={isWall}
+                                                isWeight={isWeight}
                                                 handleMouseDown={handleMouseDown}
                                                 handleMouseEnter={handleMouseEnter}
                                                 handleMouseUp={handleMouseUp}

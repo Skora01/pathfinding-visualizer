@@ -5,42 +5,54 @@ const steps = [
      [0, 1], // right
  ];
 
-const visitingOrder = []
-const result = []
-let pathFound = false
-
 export function DFS(grid, startNode, endNode, maxRows, maxCols) {
-    
-    if(startNode === endNode) {
-        result.push(endNode)
-        pathFound = true
-        return visitingOrder
-    }
+    const visitingOrder = []
+    const nodes = []
 
-    visitingOrder.push(startNode)
-    result.push(startNode)
+    nodes.push(startNode)
 
-    for(const step of steps) {
-        let newRow = startNode.row + step[0]
-        let newCol = startNode.col + step[1]
+    while(nodes.length > 0 ){
+        let currNode = nodes.pop()
         
-        if(newRow >= 0 && newRow < maxRows &&
-            newCol >= 0 && newCol < maxCols)    {
-            let currNode = grid[newRow][newCol]
+        if(visitingOrder.includes(currNode))
+            continue
 
-            if(!visitingOrder.includes(currNode) && !pathFound)
-                DFS(grid, currNode, endNode, maxRows,maxCols)
+        if(currNode.isWall)
+            continue
 
-            if(pathFound)
-                return visitingOrder
+        visitingOrder.push(currNode)
+        
+        for(const step of steps) {
+            let newRow = currNode.row + step[0]
+            let newCol = currNode.col + step[1]
 
-            result.pop()
+            if(newRow >= 0 && newRow < maxRows &&
+                newCol >= 0 && newCol < maxCols &&
+                !visitingOrder.includes(grid[newRow][newCol])) {
+
+                grid[newRow][newCol].parent = currNode
+                nodes.push(grid[newRow][newCol])
+            }
         }
-
+        if(currNode === endNode) return visitingOrder
     }
+
+    return visitingOrder
 
 }
 
 export function getTheShortestPathDFS(endNode) {
-    return result
+    const shortestPathOrder = []
+    let currNode = endNode
+    while(currNode.parent !== null) {
+        shortestPathOrder.unshift(currNode)
+        currNode = currNode.parent
+    }
+
+    shortestPathOrder.unshift(currNode)
+
+    return shortestPathOrder
+
 }
+
+

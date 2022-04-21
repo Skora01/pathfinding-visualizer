@@ -2,7 +2,16 @@ import React, { useReducer } from 'react';
 
 import AppContext from './app-context';
 import { appReducer, init } from './app-reducer';
-import { CHOOSE_ALGORITHM, RESET, UPDATE_WITH_WALLS, UPDATE_GRID } from "./app-actions"
+import { 
+    CHOOSE_ALGORITHM,
+    RESET,
+    UPDATE_WITH_WALLS,
+    ADD_WEIGHTS,
+    TOOGLE_WEIGHT,
+    UPDATE_GRID,
+    CLEAR_PATH, 
+    CLEAR_WALLS, 
+} from "./app-actions"
 
 function AppState(props) {
     const [state, dispatch] = useReducer(appReducer,[[]], init)
@@ -30,6 +39,42 @@ function AppState(props) {
         })
    }
 
+   function turnOnWeights() {
+       dispatch({
+           type: TOOGLE_WEIGHT
+       })
+   }
+
+   function addWeights(row, col) {
+       dispatch({
+           type: ADD_WEIGHTS,
+           payload: {
+               row,
+               col
+           }
+       })
+   }
+
+    //Choose pathfinding algorithm
+    function chooseAlgorithm(algorithm) {
+        dispatch({
+            type: CHOOSE_ALGORITHM,
+            payload: algorithm
+        })
+    }
+
+    function clearWalls() {
+        dispatch({
+            type: CLEAR_WALLS
+        })
+    }
+
+    function clearPath() {
+        dispatch({
+            type: CLEAR_PATH
+        })
+    }
+
     //Clear grid
     function reset(grid) {
         dispatch({
@@ -38,22 +83,19 @@ function AppState(props) {
         })
     }
 
-    //Choose pathfinding algo
-    function chooseAlgorithm(algorithm) {
-        dispatch({
-            type: CHOOSE_ALGORITHM,
-            payload: algorithm
-        })
-    }
-
     return (
         <AppContext.Provider value={{
             grid : state.grid,
             algorithm : state.algorithm,
+            toggleWeights: state.toggleWeights,
             reset,
             chooseAlgorithm,
             addWalls,
-            updateGrid
+            addWeights,
+            turnOnWeights,
+            updateGrid,
+            clearPath,
+            clearWalls
         }}>
             {props.children}
         </AppContext.Provider>

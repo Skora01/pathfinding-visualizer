@@ -8,7 +8,11 @@ import {
     MAX_ROWS,
     MAX_COLS, 
     UPDATE_WITH_WALLS,
-    UPDATE_GRID
+    UPDATE_GRID,
+    CLEAR_PATH,
+    CLEAR_WALLS,
+    ADD_WEIGHTS,
+    TOOGLE_WEIGHT
 } from "./app-actions"
 
 function createNode(row, col) {
@@ -20,6 +24,7 @@ function createNode(row, col) {
         isVisited : false,
         isShortestPath : false,
         isWall : false,
+        isWeight: false,
         distance : Infinity,
         parent: null
     }
@@ -36,7 +41,11 @@ export function init() {
         initialGrid.push(currRow)
     }
 
-    return {grid : initialGrid, algorithm : ""}
+    return {
+        grid : initialGrid,
+        algorithm : "",
+        toggleWeights: false
+    }
 }
 
 export function appReducer(state, action) {
@@ -45,7 +54,6 @@ export function appReducer(state, action) {
                 ...state,
                 algorithm : action.payload
         }
-        case RESET: return init(action.payload)
         case UPDATE_WITH_WALLS: return {
             ...state,
             grid : state.grid.map(item => {
@@ -56,6 +64,21 @@ export function appReducer(state, action) {
                             : prevNode
                 })
             })
+        }
+        case ADD_WEIGHTS: return {
+            ...state,
+            grid : state.grid.map(item => {
+                return item.map(prevNode => {
+                    return prevNode.row === action.payload.row &&
+                            prevNode.col === action.payload.col 
+                            ? {...prevNode, isWeight : !prevNode.isWeight}
+                            : prevNode
+                })
+            })
+        }
+        case TOOGLE_WEIGHT: return {
+            ...state,
+            toggleWeights: !state.toggleWeights
         }
         case UPDATE_GRID: return {
             ...state,
@@ -68,6 +91,29 @@ export function appReducer(state, action) {
                 })
             })
         }
+        case CLEAR_WALLS: return {
+            ...state,
+            grid: state.grid.map(item => {
+                return item.map(prevNode => {
+                    return {...prevNode, isWall: false}
+                })
+            })
+        }
+        case CLEAR_PATH: return {
+            ...state,
+            grid: state.grid.map(item => {
+                return item.map(prevNode => {
+                    return {
+                        ...prevNode,
+                        isVisited: false,
+                        isShortestPath: false,
+                        distance: Infinity,
+                        parent: null
+                    }
+                })
+            })
+        }
+        case RESET: return init(action.payload)
         default: return state
     }
 }
