@@ -11,6 +11,8 @@ function Dropdown() {
             <div className="dropdown__content">
                 <button onClick={() => chooseAlgorithm("Dijkstra's")}>Dijkstra's</button>
                 <button onClick={() => chooseAlgorithm("A*")}>A* Search</button>
+                <button onClick={() => chooseAlgorithm("DFS")}>Depth First Search</button>
+                <button onClick={() => chooseAlgorithm("BFS")}>Breadth First Search</button>
             </div>  
         </div>
   )

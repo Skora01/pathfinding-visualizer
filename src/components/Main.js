@@ -3,6 +3,8 @@ import Node from "./Node";
 
 import { astar, getTheShortestPathA } from "../algorithms/astar";
 import { dijkstra, getTheShortestPathD } from "../algorithms/dijkstra";
+import { DFS, getTheShortestPathDFS } from "../algorithms/DFS";
+import { BFS, getTheShortestPathBFS } from "../algorithms/BFS";
 
 import AppContext from "../context/app-context";
 import {
@@ -62,6 +64,16 @@ function Main() {
             case "A*": {
                 visitingOrder = astar(grid, startNode, endNode, MAX_ROWS, MAX_COLS)
                 shortestPath = getTheShortestPathA(endNode)
+                break
+            }
+            case "DFS": {
+                visitingOrder = DFS(grid, startNode, endNode, MAX_ROWS, MAX_COLS)
+                shortestPath = getTheShortestPathDFS(endNode)
+                break
+            }
+            case "BFS": {
+                visitingOrder = BFS(grid, startNode, endNode, MAX_ROWS, MAX_COLS)
+                shortestPath = getTheShortestPathBFS(endNode) 
                 break
             }
             default:
