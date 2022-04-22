@@ -17,7 +17,7 @@ export function DFS(grid, startNode, endNode, maxRows, maxCols) {
         if(visitingOrder.includes(currNode))
             continue
 
-        if(currNode.isWall)
+        if(currNode.isWall || currNode.isWeight)    
             continue
 
         visitingOrder.push(currNode)

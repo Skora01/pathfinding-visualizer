@@ -50,6 +50,14 @@ nav button:hover {
   color: var(--clr-hover);
 }
 
+.nav--flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  /* background-color: aliceblue; */
+}
+
 .dropdown {
   background-color: var(--clr-primary);
 }

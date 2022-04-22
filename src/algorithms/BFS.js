@@ -26,7 +26,7 @@ export function BFS(grid, startNode, endNode, maxRows, maxCols) {
             if(newRow >= 0 && newRow < maxRows &&
                 newCol >= 0 && newCol < maxCols &&
                 !visitingOrder.includes(grid[newRow][newCol]) &&
-                !grid[newRow][newCol].isWall) {
+                !grid[newRow][newCol].isWall && !grid[newRow][newCol].isWeight) {
 
                     visitingOrder.push(grid[newRow][newCol])
                     grid[newRow][newCol].parent = currNode
