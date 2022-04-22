@@ -7,9 +7,9 @@ export const CLEAR_PATH = "CLEAR_PATH"
 export const ADD_WEIGHTS = "ADD_WEIGHTS"
 export const TOOGLE_WEIGHT = "TOOGLE_WEIGHT"
 
-export const START_NODE_ROW = 10;
+export const START_NODE_ROW = 4;
 export const START_NODE_COL = 10;
-export const END_NODE_ROW = 10;
-export const END_NODE_COL = 40;
+export const END_NODE_ROW = 16;
+export const END_NODE_COL = 54;
 export const MAX_ROWS = 25
 export const MAX_COLS = 63

@@ -39,9 +39,9 @@ button {
 nav {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   padding: 0.5rem;
-  gap: 10rem;
+  gap: 8rem;
   background-color: var(--clr-primary);
   color: var(--clr-neutral);
 }
@@ -55,7 +55,6 @@ nav button:hover {
   align-items: center;
   justify-content: center;
   gap: 3rem;
-  /* background-color: aliceblue; */
 }
 
 .dropdown {
@@ -101,7 +100,7 @@ nav button:hover {
 .clear {
   display: flex;
   gap: 3rem;
-  margin-right: 13rem;
+  /* margin-right: 13rem; */
 }
 
 main {
